@@ -1,0 +1,17 @@
+services:
+  couchbase:
+    image: couchbase
+    restart: always
+    volumes:
+      - ./couchbase:/opt/couchbase/var
+    ports:
+      - 8091-8097:8091-8097
+      - 9123:9123
+      - 11207:11207
+      - 11210:11210
+      - 11280:11280
+      - 18091-18097:18091-18097
+    environment:
+      MONGO_INITDB_DATABASE: app
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
