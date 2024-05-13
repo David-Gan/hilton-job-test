@@ -27,7 +27,7 @@
 
 - ./backend is the api server
 - ./frontend is the web client
-- ./docker-compose
+- ./docker-compose.yml for deployment
 
 ## Backend
 
