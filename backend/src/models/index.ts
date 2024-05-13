@@ -1,5 +1,6 @@
 import {Ottoman} from 'ottoman';
 import {HiltonQuizApplication} from '../application';
+import {initEmployeeModel} from './employee.model';
 import {initGuestModel} from './guest.model';
 
 export * from './guest.model';
@@ -15,6 +16,7 @@ export const bootModels = async (app: HiltonQuizApplication) => {
   });
 
   await initGuestModel(app, ottoman);
+  await initEmployeeModel(app, ottoman);
 
   await ottoman.start();
 

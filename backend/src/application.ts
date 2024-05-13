@@ -9,6 +9,7 @@ import {
 } from '@loopback/rest-explorer';
 import {ServiceMixin} from '@loopback/service-proxy';
 import path from 'path';
+import {EmployeeAuthenticationStrategy} from './auth/employee.strategy';
 import {GuestAuthenticationStrategy} from './auth/guest.strategy';
 import {bootModels} from './models';
 import {MySequence} from './sequence';
@@ -46,6 +47,7 @@ export class HiltonQuizApplication extends BootMixin(
 
     this.component(AuthenticationComponent);
     registerAuthenticationStrategy(this, GuestAuthenticationStrategy);
+    registerAuthenticationStrategy(this, EmployeeAuthenticationStrategy);
   }
 
   async boot() {
