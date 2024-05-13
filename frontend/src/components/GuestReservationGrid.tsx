@@ -25,11 +25,11 @@ const columns: GridColDef[] = [
 ];
 
 const GuestReservationGrid = () => {
-    const { loading, error, data } = useQuery(GET_MY_RESERVATIONS, {pollInterval: 2000});
+    const { loading, error, data } = useQuery(GET_MY_RESERVATIONS, {fetchPolicy: "no-cache"});
     if (error) return <Alert severity="error">{error.message}</Alert>
 
-    const { my_reservations } = data || {}
-    return <DataGrid loading={loading} rows={my_reservations || []} columns={columns} pageSizeOptions={[25, 50, 100]} sx={{minHeight: '25vh'}} />
+    const { myReservations } = data || {}
+    return <DataGrid loading={loading} rows={myReservations || []} columns={columns} pageSizeOptions={[25, 50, 100]} sx={{minHeight: '25vh'}} />
 }
 
 export default GuestReservationGrid;

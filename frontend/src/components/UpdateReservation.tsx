@@ -6,7 +6,7 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form"
 import { Reservation } from "../types";
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
-import { UPDATE_RESERVATION } from "../gqls";
+import { GET_MY_RESERVATIONS, GET_RESERVATIONS, UPDATE_RESERVATION } from "../gqls";
 import { useMutation } from "@apollo/client";
 
 const style = {
@@ -54,7 +54,9 @@ const UpdateReservation = ({ row }: UpdateReservationProps) => {
         resolver: yupResolver<FormValuesType>(schema),
     })
 
-    const [updateReservation, { loading, error }] = useMutation(UPDATE_RESERVATION);
+    const [updateReservation, { loading, error }] = useMutation(UPDATE_RESERVATION, {
+        refetchQueries: [GET_MY_RESERVATIONS, GET_RESERVATIONS]
+    });
 
     const onSubmit: SubmitHandler<FormValuesType> = async (data) => {
         try {

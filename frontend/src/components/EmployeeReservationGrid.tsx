@@ -32,7 +32,7 @@ const EmployeeReservationGrid = () => {
     const [status, setStatus] = useState('')
     const [date, setDate] = useState<dayjs.Dayjs | null>(null)
     const { loading, error, data } = useQuery(GET_RESERVATIONS, {
-        pollInterval: 2000,
+        fetchPolicy: "no-cache",
         variables: {
             date: date,
             status: status

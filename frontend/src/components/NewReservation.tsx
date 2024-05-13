@@ -5,8 +5,9 @@ import { useState } from "react"
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
-import { useMutation } from "@apollo/client";
-import { CREATE_RESERVATION } from "../gqls";
+import { useApolloClient, useMutation } from "@apollo/client";
+import { CREATE_RESERVATION, GET_MY_RESERVATIONS, GET_RESERVATIONS } from "../gqls";
+import { sleep } from "../lib";
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -56,9 +57,12 @@ const NewReservation = () => {
         resolver: yupResolver(schema),
     })
 
+    const client = useApolloClient();
     const onSubmit: SubmitHandler<FormValuesType> = async (data) => {
         try {
             await createReservation({ variables: { input: data } })
+            await sleep(0.4)
+            await client.refetchQueries({ include: [GET_MY_RESERVATIONS, GET_RESERVATIONS] })
             handleClose()
         } catch (error: any) {
             for (const field in error.stack) {
