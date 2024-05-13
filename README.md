@@ -21,7 +21,7 @@
 
 - online demo http://8.130.32.70:8000/
 - Employee Account Email: admin@admin.com
-- Employee Account Password: password (password is the password)
+- Employee Account Password: password ("password" is the password)
 
 # Summary
 
