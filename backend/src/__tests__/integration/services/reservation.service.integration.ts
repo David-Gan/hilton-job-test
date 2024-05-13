@@ -27,7 +27,7 @@ describe('reservation.service (integration)', () => {
 
         const reservation = await reservationService.create({
             name: 'name',
-            phone: '18888888888',
+            contact: '18888888888',
             size: 1,
             arrivalAt: new Date(),
             guest
@@ -44,7 +44,7 @@ describe('reservation.service (integration)', () => {
 
         const updatedReservation = await reservationService.update(reservation.id, {
             name: 'name2',
-            phone: '18888888888',
+            contact: '18888888888',
             size: 2,
             arrivalAt: new Date(),
         })

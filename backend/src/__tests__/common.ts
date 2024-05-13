@@ -30,7 +30,7 @@ export const createGuest = async (guestService: GuestService) => {
 export const createReservation = async (reservationService: ReservationService, guest: GuestModel) => {
   const reservation = await reservationService.create({
     name: 'name',
-    phone: '18888888888',
+    contact: '18888888888',
     size: 1,
     arrivalAt: new Date(),
     guest

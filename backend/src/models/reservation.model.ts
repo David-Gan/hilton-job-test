@@ -11,7 +11,7 @@ export enum ReservationStatus {
 export type Reservation = {
   id: string
   name: string
-  phone: string
+  contact: string
   size: number
   arrivalAt: Date
   status: ReservationStatus
@@ -25,7 +25,7 @@ export type ReservationModel = ModelTypes<Partial<Reservation>, Reservation>
 export const ReservationSchema = new Schema({
   guest: {type: GuestSchema, ref: 'Guest', required: true},
   name: {type: String, required: true},
-  phone: {type: String, required: true},
+  contact: {type: String, required: true},
   size: {type: Number, min: 1, required: true},
   arrivalAt: {type: Date, default: Date.now, required: true},
   status: {type: String, enum: Object.values(ReservationStatus), required: true}

@@ -2,8 +2,7 @@ import {AuthenticationStrategy} from '@loopback/authentication';
 import {service} from '@loopback/core';
 import {HttpErrors, Request} from '@loopback/rest';
 import {UserProfile} from '@loopback/security';
-import {JwtPayload} from 'jsonwebtoken';
-import {JwtService} from '../services';
+import {JwtPayload, JwtService} from '../services';
 import {EmployeeService} from '../services/employee.service';
 
 export interface Credentials {
@@ -25,8 +24,8 @@ export class EmployeeAuthenticationStrategy implements AuthenticationStrategy {
     const token = this.extractCredentials(request);
     try {
       const payload: JwtPayload = this.jwtService.verify(token);
-      const guset = await this.employeeService.employeeModel.findById(payload.id, {select: 'id, email, createdAt'})
-      return guset as unknown as UserProfile
+      const employee = await this.employeeService.employeeModel.findById(payload.id, {select: 'id, email, createdAt'})
+      return employee as unknown as UserProfile
     } catch (e) {
       throw new HttpErrors.Unauthorized(`Invalid Token.`);
     }
