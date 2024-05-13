@@ -12,10 +12,10 @@ export const bootModels = async (app: HiltonQuizApplication) => {
   const ottoman = new Ottoman()
 
   await ottoman.connect({
-    connectionString: 'couchbase://127.0.0.1',
-    bucketName: 'default',
-    username: 'Administrator',
-    password: 'password'
+    connectionString: process.env.DB_URI || '',
+    bucketName: process.env.DB_BUCKET_NAME || '',
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
   });
 
   await initGuestModel(app, ottoman);

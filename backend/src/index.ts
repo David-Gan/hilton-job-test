@@ -1,3 +1,4 @@
+require('dotenv').config();
 import {ApplicationConfig, HiltonQuizApplication} from './application';
 
 export * from './application';
