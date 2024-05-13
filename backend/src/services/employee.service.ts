@@ -4,7 +4,7 @@ import {Employee, EmployeeModel} from '../models/employee.model';
 
 @injectable({scope: BindingScope.SINGLETON})
 export class EmployeeService {
-  private salt: string = bcrypt.genSaltSync(10);
+  private salt: string = process.env.JWT_SALT || ''
 
   constructor(
     @inject('models.employee')

@@ -5,7 +5,7 @@ import {Guest, GuestModel} from '../models';
 
 @injectable({scope: BindingScope.SINGLETON})
 export class GuestService {
-  private salt: string = bcrypt.genSaltSync(10);
+  private salt: string = process.env.JWT_SALT || ''
 
   constructor(
     @inject('models.guest')
