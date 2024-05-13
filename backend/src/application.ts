@@ -15,6 +15,7 @@ import {GuestAuthenticationStrategy} from './auth/guest.strategy';
 import {GraphqlContext} from './graphql-resolvers/types';
 import {bootModels} from './models';
 import {MySequence} from './sequence';
+import {EmployeeService} from './services';
 
 export {ApplicationConfig};
 
@@ -46,11 +47,6 @@ export class HiltonQuizApplication extends BootMixin(
     const server = this.getSync(GraphQLBindings.GRAPHQL_SERVER);
     this.expressMiddleware('middleware.express.GraphQL', server.expressApp);
 
-    // this.find(i => {
-    //   console.log(i.key)
-    //   return false
-    // })
-
     // bind user to Graphql Context
     this.bind(GraphQLBindings.GRAPHQL_CONTEXT_RESOLVER).to(async context => {
       const req = context.req
@@ -60,13 +56,13 @@ export class HiltonQuizApplication extends BootMixin(
         const guestAuthenticationStrategy: GuestAuthenticationStrategy
           = await this.get('authentication.strategies.GuestAuthenticationStrategy');
         guest = await guestAuthenticationStrategy.authenticate(req)
-      } catch (e) { }
+      } catch (_) {;}
 
       try {
         const employeeAuthenticationStrategy: EmployeeAuthenticationStrategy
           = await this.get('authentication.strategies.EmployeeAuthenticationStrategy')
         employee = await employeeAuthenticationStrategy.authenticate(req)
-      } catch (e) {console.log({e})}
+      } catch (_) {;}
 
       return {...context, guest, employee};
     });
@@ -103,5 +99,17 @@ export class HiltonQuizApplication extends BootMixin(
   async boot() {
     await super.boot();
     await bootModels(this)
+    await this.seed()
+  }
+
+  async seed() {
+    const employeeService: EmployeeService = await this.get('services.EmployeeService')
+    const count = await employeeService.employeeModel.count()
+    if (!count) {
+      await employeeService.register({
+        email: "admin@admin.com",
+        password: "password"
+      })
+    }
   }
 }

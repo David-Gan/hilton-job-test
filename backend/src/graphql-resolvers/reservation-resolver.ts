@@ -30,7 +30,7 @@ export class ReservationResolver {
 
   @query(returns => [Reservation])
   @authorized('guest')
-  async my_reservations(): Promise<Reservation[]> {
+  async myReservations(): Promise<Reservation[]> {
     const {guest} = this.resolverData.context as GraphqlContext
     const {rows} = await this.reservationService.reservationModel.findByGuest(guest!.id)
     return rows;
@@ -78,7 +78,7 @@ export class ReservationResolver {
     return updatedReservation
   }
 
-  @authorized('employee')
+  @authorized('guest', 'employee')
   @mutation(returns => Reservation)
   async cancelReservation(
     @arg('id') id: string,

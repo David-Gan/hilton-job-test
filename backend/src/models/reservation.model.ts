@@ -34,6 +34,11 @@ export const ReservationSchema = new Schema({
 ReservationSchema.index.findByGuest = {
   by: ['guest'],
   type: 'n1ql',
+  options: {
+    sort: {
+      id: 'DESC'
+    }
+  }
 };
 
 export const initReservationModel = async (app: HiltonQuizApplication, ottoman: Ottoman) => {
