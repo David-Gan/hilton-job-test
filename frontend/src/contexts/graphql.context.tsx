@@ -7,7 +7,7 @@ export function GraphqlProvider({ children }: { children: ReactElement }) {
 
     const client = useMemo(() => {
         return new ApolloClient({
-            uri: 'http://127.0.0.1:3000/graphql',
+            uri: import.meta.env.VITE_GRAPHQL_URL,
             cache: new InMemoryCache(),
             headers: {
                 Guest_Token: guestToken || '',
