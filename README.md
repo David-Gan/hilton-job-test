@@ -1,21 +1,21 @@
 # Tech Requirements
-•	√ Use Node.js stack to complete this test
-•	√ Data should be persisted to a NoSQL database
-•	√ Build RESTful Endpoints
-•	√ Build GraphQL Endpoints
-•	√ Unit-test code
-•	√ A SPA (Single Page Application) to interact with the backend and show how the API works.
+-  Use Node.js stack to complete this test √
+-  Data should be persisted to a NoSQL database √
+-  Build RESTful Endpoints √
+-  Build GraphQL Endpoints √
+-  Unit-test code √
+-  A SPA (Single Page Application) to interact with the backend and show how the API works. √
 
 # Bouns Requirements
-•	√ Solution for building and deploying the project
-•	√ Basic Authentication
-•	√ Couchbase
-•	√ cucumber
-•	√ Docker
-•	√ GraphQL
-•	√ Loopback
-•	√ React
-•	√ TypeScript
+-  Solution for building and deploying the project √
+-  Basic Authentication √
+-  Couchbase √
+-  cucumber √
+-  Docker √
+-  GraphQL √
+-  Loopback √
+-  React √
+-  TypeScript √
 
 # Demo
 
@@ -41,6 +41,7 @@
 2. cp .env.default to .env and update
 3. yarn
 4. yarn dev
+5. yarn test (will clear db)
 
 ## Frontend
 
