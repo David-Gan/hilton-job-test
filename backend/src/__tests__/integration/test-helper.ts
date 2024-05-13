@@ -1,14 +1,9 @@
 import {
-  Client,
-  createRestAppClient,
-  givenHttpServerConfig,
+  givenHttpServerConfig
 } from '@loopback/testlab';
-
 import {Ottoman} from 'ottoman';
 import {HiltonQuizApplication} from '../..';
 import {clearCollection} from '../common';
-
-
 
 export async function setupApplication(): Promise<AppWithClient> {
   const restConfig = givenHttpServerConfig({
@@ -26,15 +21,13 @@ export async function setupApplication(): Promise<AppWithClient> {
   await app.boot();
   await app.start();
 
-  const client = createRestAppClient(app);
 
   const ottoman: Ottoman = await app.get('ottoman')
   await clearCollection(ottoman, 'Guest')
 
-  return {app, client};
+  return {app};
 }
 
 export interface AppWithClient {
   app: HiltonQuizApplication;
-  client: Client;
 }
