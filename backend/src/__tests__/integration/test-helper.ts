@@ -1,9 +1,8 @@
 import {
   givenHttpServerConfig
 } from '@loopback/testlab';
-import {Ottoman} from 'ottoman';
 import {HiltonQuizApplication} from '../..';
-import {clearCollection, clearDb} from '../common';
+import {clearDb} from '../common';
 
 export async function setupApplication(): Promise<AppWithClient> {
   const restConfig = givenHttpServerConfig({
@@ -21,9 +20,6 @@ export async function setupApplication(): Promise<AppWithClient> {
   await app.boot();
   await app.start();
   await clearDb(app);
-
-  const ottoman: Ottoman = await app.get('ottoman')
-  await clearCollection(ottoman, 'Guest')
 
   return {app};
 }

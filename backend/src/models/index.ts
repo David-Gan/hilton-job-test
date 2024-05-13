@@ -2,8 +2,11 @@ import {Ottoman} from 'ottoman';
 import {HiltonQuizApplication} from '../application';
 import {initEmployeeModel} from './employee.model';
 import {initGuestModel} from './guest.model';
+import {initReservationModel} from './reservation.model';
 
+export * from './employee.model';
 export * from './guest.model';
+export * from './reservation.model';
 
 export const bootModels = async (app: HiltonQuizApplication) => {
   const ottoman = new Ottoman()
@@ -17,7 +20,7 @@ export const bootModels = async (app: HiltonQuizApplication) => {
 
   await initGuestModel(app, ottoman);
   await initEmployeeModel(app, ottoman);
-
+  await initReservationModel(app, ottoman);
   await ottoman.start();
 
   app.bind('ottoman').to(ottoman)
